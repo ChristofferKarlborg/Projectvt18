@@ -8,28 +8,36 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+import dataaccess.dao.AccountDao;
 import dataaccess.dao.CompanyDao;
+import dataaccess.dao.FlightDao;
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
+import entities.Account;
 import entities.Company;
+import entities.Flight;
+import utilities.SimpleGenericCrud;
 
 
 public class CompanyDaoImpl implements CompanyDao {
 
 	private SimpleGenericCrud<Company> crudDao = new SimpleGenericCrud(Company.class);
+	private AccountDao accDao = new AccountDaoImpl();
+	private FlightDao flightDao = new FlightDaoImpl();
+	
 	private Session session = crudDao.session;
 	
 	@Override
 	public void createCompany(Company newCompany) {
 		
 		crudDao.createEntity(newCompany);
-		
+
 	}
 
 	@Override
 	public Company findCompanyById(int companyId) throws IncorrectAmountOfQueryResultsException {
-		
 		return crudDao.findEntityById(companyId);
+
 	}
 
 	@Override

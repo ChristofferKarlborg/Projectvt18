@@ -7,13 +7,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dataaccess.dao.CompanyDao;
-import dataaccess.dao.CustomerDao;
+import dataaccess.dao.FlightDao;
+import dataaccess.dao.AccountDao;
 import dataaccess.daoimpl.CompanyDaoImpl;
-import dataaccess.daoimpl.CustomerDaoImpl;
+import dataaccess.daoimpl.FlightDaoImpl;
+import dataaccess.daoimpl.AccountDaoImpl;
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
 import entities.Company;
-import entities.Customer;
+import entities.Flight;
+import entities.Account;
 import utilities.HibernateUtilities;
 
 public class Test_CompanyDao {
@@ -107,4 +110,15 @@ public class Test_CompanyDao {
 			fail();
 		}
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

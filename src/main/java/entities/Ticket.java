@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import utilities.EntityIdAccess;
+
 @Entity
 public class Ticket  implements EntityIdAccess{
 	
@@ -15,11 +17,10 @@ public class Ticket  implements EntityIdAccess{
 	
 	private int seatId;
 	
-	private int customerId;
+	private Integer customerId = null;
 	
-	public Ticket(int customerId) {
-		seatId = id+1;
-		this.customerId = customerId;
+	public Ticket(int seatId) {
+		this.seatId = seatId;
 	}
 
 	public int getId() {

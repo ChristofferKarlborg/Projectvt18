@@ -1,5 +1,7 @@
 package dataaccess.dao;
 
+import java.util.List;
+
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
 import entities.Ticket;
@@ -16,6 +18,8 @@ public interface TicketDao {
 
 				public void removeTicketById(int ticketId) throws UserDoesNotExistException;
 				
-				public void findTicketByCustomerId(int customerID);
+				public List<Ticket>findTicketByCustomerId(int customerID) throws IncorrectAmountOfQueryResultsException;
+				
+				public Ticket findTicketBySeatId(int seatId) throws IncorrectAmountOfQueryResultsException;
 
 }

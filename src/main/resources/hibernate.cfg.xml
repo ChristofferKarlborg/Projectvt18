@@ -5,20 +5,21 @@
 
 
 <hibernate-configuration>
- <session-factory>
-  <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-  <property name="hibernate.connection.password"></property>
-  <property name="hibernate.connection.username">sa</property>
-  <property name="hibernate.connection.url">jdbc:hsqldb:file:database.dat;shutdown=true</property>
-  
-  <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
-  
-  <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
-  
-  <mapping class="entities.Customer"/>
-  <mapping class="entities.Company"/>
-  <mapping class="entities.Ticket"/>
-   <mapping class="entities.Flight"/>
- </session-factory>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.url">jdbc:hsqldb:file:database.dat;shutdown=true</property>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<mapping class="entities.Account" />
+		<mapping class="entities.Company" />
+		<mapping class="entities.Ticket" />
+		<mapping class="entities.Flight" />
+		<mapping class="entities.Seat" />
+	</session-factory>
 </hibernate-configuration>

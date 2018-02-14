@@ -12,59 +12,60 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import dataaccess.dao.CustomerDao;
+import dataaccess.dao.AccountDao;
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
-import entities.Customer;
+import entities.Account;
 import utilities.HibernateUtilities;
+import utilities.SimpleGenericCrud;
 
-public class CustomerDaoImpl implements CustomerDao {
+public class AccountDaoImpl implements AccountDao {
 
-	private SimpleGenericCrud<Customer> crudDao = new SimpleGenericCrud(Customer.class);
+	private SimpleGenericCrud<Account> crudDao = new SimpleGenericCrud(Account.class);
 	Session session = HibernateUtilities.getSessionFactory().openSession();
 
 	
 	@Override
-	public void createCustomer(Customer newCustomer) {
-		executeQueryThenCommit((Customer s) -> {
+	public void createAccount(Account newAccount) {
+		executeQueryThenCommit((Account s) -> {
 			session.save(s);
-		}, newCustomer);
+		}, newAccount);
 	}
 
 	@Override
-	public Customer findCustomerById(int customerId) throws IncorrectAmountOfQueryResultsException {
+	public Account findAccountById(int accountId) throws IncorrectAmountOfQueryResultsException {
 
 		// Build Criteria
 		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<Customer> criteria = builder.createQuery(Customer.class);
-		Root<Customer> root = criteria.from(Customer.class);
-		criteria.select(root).where(builder.equal(root.get("id"), customerId));
+		CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
+		Root<Account> root = criteria.from(Account.class);
+		criteria.select(root).where(builder.equal(root.get("id"), accountId));
 
 		// Execute Query
-		List<Customer> customer = executeQueryThenCommit(crit -> {
+		List<Account> account = executeQueryThenCommit(crit -> {
 			return session.createQuery(crit).setMaxResults(1).getResultList();
 		}, criteria);
 
 		// Check result size and return
-		if (customer.size() != 1) {
-			throw new IncorrectAmountOfQueryResultsException("Amount of users returned from DB should be 1, is : " + customer.size() );
+		if (account.size() != 1) {
+			throw new IncorrectAmountOfQueryResultsException("Amount of users returned from DB should be 1, is : " + account.size() );
 		}
-		return customer.get(0);
+		return account.get(0);
 
 	}
 
 	@Override
-	public void updateCustomer(Customer customerToUpdate) throws UserDoesNotExistException {
+	public void updateAccount(Account accountToUpdate) throws UserDoesNotExistException {
 
 		try {
 
-			// Find the existing customer
-			Customer persistentUser = findCustomerById(customerToUpdate.getId());
-			persistentUser.setCustomer(customerToUpdate);
+			// Find the existing account
+			Account persistentUser = findAccountById(accountToUpdate.getId());
+			persistentUser.setCustomer(accountToUpdate);
 
 			// Update
-			executeQueryThenCommit(customer -> {
-				session.update(customer);
+			executeQueryThenCommit(account -> {
+				session.update(account);
 			}, persistentUser);
 
 		} catch (IncorrectAmountOfQueryResultsException e) {
@@ -74,16 +75,16 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public void removeCustomerById(int customerId) {
+	public void removeAccountById(int accountId) {
 
 		try {
 
-			// Find the existing customer
-			Customer persistentUser = findCustomerById(customerId);
+			// Find the existing account
+			Account persistentUser = findAccountById(accountId);
 
 			// Update
-			executeQueryThenCommit(customer -> {
-				session.delete(customer);
+			executeQueryThenCommit(account -> {
+				session.delete(account);
 			}, persistentUser);
 
 		} catch (IncorrectAmountOfQueryResultsException e) {
@@ -112,19 +113,19 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public Customer findCustomerByEmail(String customerEmail) throws UserDoesNotExistException  {
+	public Account findAccountByEmail(String accountEmail) throws UserDoesNotExistException  {
 
-		List<Customer> customerToReturnList = crudDao.findByFieldValue("email", customerEmail);
-		if(customerToReturnList.size() == 0) {
-			throw new UserDoesNotExistException();
+		List<Account> accountToReturnList = crudDao.findByFieldValue("email", accountEmail);
+		if(accountToReturnList.size() == 0) {
+			throw new UserDoesNotExistException("List of returned users is empty");
 			
 		//TODO: set up case for this;	
 		//If we get more than one result, we have an issue where multiple accounts use the same email, this is not allowed and then we've missed some validation somewhere;
-		}else if(customerToReturnList.size() > 1) {
+		}else if(accountToReturnList.size() > 1) {
 			System.out.println("[WARNING] Multiple results from email query, returning only first one");
 		}
 		
-		return customerToReturnList.get(0);
+		return accountToReturnList.get(0);
 		
 	}
 

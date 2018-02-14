@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.junit.Test;
 
-import entities.Customer;
+import entities.Account;
 import utilities.HibernateUtilities;
 
 public class Test_HsqlDB {
@@ -29,7 +29,7 @@ public class Test_HsqlDB {
 
 		}
 
-		Customer tmpCustomer = new Customer("asdf", "asdf@asdf.com");
+		Account tmpCustomer = new Account("asdf", "asdf@asdf.com");
 
 		Session session = HibernateUtilities.getSessionFactory().openSession();
 		session.beginTransaction();
@@ -44,14 +44,14 @@ public class Test_HsqlDB {
 		//session.getTransaction().commit();
 //
 		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
-		Root<Customer> root = cq.from(Customer.class); // SELECT * FROM
+		CriteriaQuery<Account> cq = cb.createQuery(Account.class);
+		Root<Account> root = cq.from(Account.class); // SELECT * FROM
 
 		Query q = session.createQuery(cq);
 
 		cb.equal(root.get("name"), "asdf"); // WHERE name = "asdf";
 
-		List<Customer> people = q.getResultList();
+		List<Account> people = q.getResultList();
 
 		System.out.println(people.get(0).getName());
 

@@ -1,8 +1,15 @@
 package entities;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import utilities.EntityIdAccess;
 
 @Entity
 public class Flight implements EntityIdAccess {
@@ -12,14 +19,18 @@ public class Flight implements EntityIdAccess {
 	private int id;
 	
 	private String aircraftRegistrationNumber;
-	private int arrivalTime;
-	private int departure;
+	private GregorianCalendar arrivalTime;
+	private GregorianCalendar departure;
 	private int companyID;
 	private boolean international;
 	private int gate;
 	private int delayed;
 	
-	public Flight(String aircraftRegistrationNumber, int arrivalTime, int departure, int companyID, boolean international, int gate, int delayed) {
+	//TODO: add seats
+	@Transient
+	List<Seat> seats;
+	
+	public Flight(String aircraftRegistrationNumber, GregorianCalendar arrivalTime, GregorianCalendar departure, int companyID, boolean international, int gate, int delayed, List<Seat> seats) {
 		super();
 		this.aircraftRegistrationNumber = aircraftRegistrationNumber;
 		this.arrivalTime = arrivalTime;
@@ -28,6 +39,7 @@ public class Flight implements EntityIdAccess {
 		this.international = international;
 		this.gate = gate;
 		this.delayed = delayed;
+		this.seats = seats;
 	}
 	
 	private Flight() {
@@ -40,10 +52,10 @@ public class Flight implements EntityIdAccess {
 	public String getAircraftRegistrationNumber() {
 		return aircraftRegistrationNumber;
 	}
-	public int getArrivalTime() {
+	public GregorianCalendar getArrivalTime() {
 		return arrivalTime;
 	}
-	public int getDeparture() {
+	public GregorianCalendar getDeparture() {
 		return departure;
 	}
 	public int getCompanyID() {
@@ -58,10 +70,10 @@ public class Flight implements EntityIdAccess {
 	public int getDelayed() {
 		return delayed;
 	}
-	public void setArrivalTime(int arrivalTime) {
+	public void setArrivalTime(GregorianCalendar arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-	public void setDeparture(int departure) {
+	public void setDeparture(GregorianCalendar departure) {
 		this.departure = departure;
 	}
 	public void setInternational(boolean international) {

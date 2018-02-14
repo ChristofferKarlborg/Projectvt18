@@ -1,5 +1,7 @@
 package dataaccess.daoimpl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import dataaccess.dao.TicketDao;
@@ -7,6 +9,7 @@ import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
 import entities.Company;
 import entities.Ticket;
+import utilities.SimpleGenericCrud;
 
 public class TicketDaoImpl implements TicketDao{
 	
@@ -33,14 +36,20 @@ public class TicketDaoImpl implements TicketDao{
 		try {
 			crudDao.removeEntity(crudDao.findEntityById(ticketId));
 		} catch (IncorrectAmountOfQueryResultsException e) {
-			throw new UserDoesNotExistException();
+			throw new UserDoesNotExistException("User does not exists");
 		}
 	}
 
 	@Override
-	public void findTicketByCustomerId(int customerID) {
-		// TODO Auto-generated method stub
+	public List<Ticket> findTicketByCustomerId(int customerId) throws IncorrectAmountOfQueryResultsException {
 		
+		return crudDao.findByFieldValue("customerId", Integer.toString(customerId));	
+	}
+
+	@Override
+	public Ticket findTicketBySeatId(int seatId) throws IncorrectAmountOfQueryResultsException {
+		
+		return crudDao.findByFieldValueSingleResult("seatId", Integer.toString(seatId));
 	}
 
 }

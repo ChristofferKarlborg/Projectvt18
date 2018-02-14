@@ -1,13 +1,32 @@
 package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import utilities.EntityIdAccess;
+import utilities.SeatClass;
 
 @Entity
 public class Seat  implements EntityIdAccess{
+	
+	@Id
+	@GeneratedValue
 	private int id;
 	private int flight;
-	private boolean occupied;
-	private String type;
+	
+	@Enumerated(EnumType.STRING)
+	private SeatClass type = null;
+	
+	public Seat(SeatClass type){
+		this.type = type;
+	}
+	
+	private Seat() {
+		
+	}
 	
 	public int getId() {
 		return id;
@@ -15,10 +34,8 @@ public class Seat  implements EntityIdAccess{
 	public int getFlight() {
 		return flight;
 	}
-	public boolean isOccupied() {
-		return occupied;
-	}
-	public String getType() {
+
+	public SeatClass getType() {
 		return type;
 	}
 	public void setId(int id) {
@@ -27,10 +44,8 @@ public class Seat  implements EntityIdAccess{
 	public void setFlight(int flight) {
 		this.flight = flight;
 	}
-	public void setOccupied(boolean occupied) {
-		this.occupied = occupied;
-	}
-	public void setType(String type) {
+
+	public void setType(SeatClass type) {
 		this.type = type;
 	}
 	

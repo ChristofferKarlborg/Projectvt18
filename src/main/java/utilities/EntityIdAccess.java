@@ -1,4 +1,4 @@
-package entities;
+package utilities;
 
 public interface EntityIdAccess {
 	public int getId();

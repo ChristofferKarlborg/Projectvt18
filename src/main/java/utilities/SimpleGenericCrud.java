@@ -1,4 +1,4 @@
-package dataaccess.daoimpl;
+package utilities;
 
 
 //TODO: Inte klar
@@ -16,14 +16,12 @@ import org.hibernate.Session;
 
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
-import entities.EntityIdAccess;
-import utilities.HibernateUtilities;
 
 public class SimpleGenericCrud<T extends EntityIdAccess> {
 
 	
 	//Get session from utilities and open it
-	Session session = HibernateUtilities.getSessionFactory().openSession();
+	public Session session = HibernateUtilities.getSessionFactory().openSession();
 	
 	//Class literal, to be used of instanciating the criteria
 	private Class<T> genericClass;

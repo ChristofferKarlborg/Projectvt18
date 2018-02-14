@@ -1,5 +1,7 @@
 package dataaccess.daoimpl;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,8 +13,8 @@ import org.hibernate.Session;
 import dataaccess.dao.FlightDao;
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
-import entities.Company;
 import entities.Flight;
+import utilities.SimpleGenericCrud;
 
 public class FlightDaoImpl implements FlightDao {
 
@@ -63,13 +65,37 @@ public class FlightDaoImpl implements FlightDao {
 	}
 
 	@Override
-	public List<Flight> findFlightByArrivalTime(int arrivalTime) {
-		return crudDao.findByFieldValue("arrivalTime", Integer.toString(arrivalTime));
+	public List<Flight> findFlightByArrivalTime(GregorianCalendar arrivalTime) {
+
+		// Build Criteria
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
+		Root<Flight> root = criteria.from(Flight.class);
+		criteria.select(root).where(builder.equal(root.get("arrivalTime"), arrivalTime));
+
+		// Execute Query
+		List<Flight> entityList = crudDao.executeQueryThenCommit(crit -> {
+			return session.createQuery(crit).getResultList();
+		}, criteria);
+
+		return entityList;
 	}
 
 	@Override
-	public List<Flight> findFlightByDeparture(int departure) {
-		return crudDao.findByFieldValue("departure", Integer.toString(departure));
+	public List<Flight> findFlightByDeparture(GregorianCalendar departure) {
+		
+		// Build Criteria
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
+		Root<Flight> root = criteria.from(Flight.class);
+		criteria.select(root).where(builder.equal(root.get("departure"), departure));
+
+		// Execute Query
+		List<Flight> entityList = crudDao.executeQueryThenCommit(crit -> {
+			return session.createQuery(crit).getResultList();
+		}, criteria);
+
+		return entityList;
 	}
 
 	@Override
@@ -100,7 +126,6 @@ public class FlightDaoImpl implements FlightDao {
 		List<Flight> entityList = crudDao.executeQueryThenCommit(crit -> {
 			return session.createQuery(crit).getResultList();
 		}, criteria);
-
 
 		return entityList;
 

@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -18,23 +20,30 @@ import entities.Flight;
 public class Test_FlightDao {
 
 	private static FlightDao dao = new FlightDaoImpl();
+	private static GregorianCalendar currentDate = new GregorianCalendar();
+	private static GregorianCalendar nextDate = new GregorianCalendar();
+	private static GregorianCalendar twoDaysFromNow = new GregorianCalendar();
+	{
+		nextDate.add(GregorianCalendar.DAY_OF_YEAR, 1);
+		twoDaysFromNow.add(GregorianCalendar.DAY_OF_YEAR, 2);
+	}
 
 	@BeforeClass
 	public static void setUp() {
 		
-		dao.createFlight(new Flight("asdf-asdf1", 00, 01, 1,     false, 21, 0));
-		dao.createFlight(new Flight("asdf-asdf2", 01, 02, 20,    true,  21, 0));
-		dao.createFlight(new Flight("asdf-asdf3", 03, 11, 300,   false, 21, 5));
-		dao.createFlight(new Flight("asdf-asdf4", 05, 07, 4000,  true,  21, 0));
-		dao.createFlight(new Flight("asdf-asdf5", 22, 01, 50000, false, 22, 0));
+		dao.createFlight(new Flight("asdf-asdf1", currentDate, nextDate, 1,     false, 21, 0, null));
+		dao.createFlight(new Flight("asdf-asdf2", currentDate, nextDate, 20,    true,  21, 0, null));
+		dao.createFlight(new Flight("asdf-asdf3", currentDate, nextDate, 300,   false, 21, 5, null));
+		dao.createFlight(new Flight("asdf-asdf4", nextDate, twoDaysFromNow, 4000,  true,  21, 0, null));
+		dao.createFlight(new Flight("asdf-asdf5", nextDate, twoDaysFromNow, 50000, false, 22, 0, null));
 		
-		dao.createFlight(new Flight("asdf-asdf10", 22, 01, 50000, false, 22, 0));
-		dao.createFlight(new Flight("asdf-asdf11", 22, 01, 50000, false, 22, 0));
+		dao.createFlight(new Flight("asdf-asdf10", currentDate, twoDaysFromNow, 50000, false, 22, 0, null));
+		dao.createFlight(new Flight("asdf-asdf11", currentDate, nextDate, 50000, false, 22, 0, null));
 	}
 	
 	@Test
 	public void test_FlightCanBeReadFromDB() {
-		Flight flight = new Flight("asdf-asdf12", 22, 01, 50000, false, 00022, 0);
+		Flight flight = new Flight("asdf-asdf12", currentDate, nextDate, 50000, false, 00022, 0, null);
 		dao.createFlight(flight);
 		assertTrue(dao.findFlightById(flight.getId()).getId() == flight.getId());
 	}
@@ -74,32 +83,20 @@ public class Test_FlightDao {
 	@Test
 	public void test_FlightCanBeFoundByArrivalTime() {
 		
-		List<Flight> result = dao.findFlightByArrivalTime(1);
+	
 		
-		if(result.size() > 0) {
-			for(Flight flight : result ) {
-				assertTrue(flight.getArrivalTime() == 1);
-			}
-		}else {
-			fail();
-		}
+		List<Flight> result = dao.findFlightByArrivalTime(nextDate);
+		
+		assertTrue(result.size() == 2);
 		
 	}
 	
 	@Test
 	public void test_FlightCanBeFoundByDeparture() {
 		
-		List<Flight> result = dao.findFlightByDeparture(1);
+		List<Flight> result = dao.findFlightByDeparture(twoDaysFromNow);
+		assertTrue(result.size() == 3);
 		
-		if(result.size() > 0) {
-			for(Flight flight : result ) {
-				System.out.println( "Value for departure"  + flight.getDeparture());
-				assertTrue(flight.getDeparture() == 1);
-				
-			}
-		}else {
-			fail();
-		}
 	}
 	
 	@Test
