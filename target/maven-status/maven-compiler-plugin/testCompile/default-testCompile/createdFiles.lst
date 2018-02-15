@@ -1,5 +1,0 @@
-tests\InMemoryDbUtility.class
-tests\Test_HsqlDB.class
-tests\Test_CompanyDao.class
-tests\Test_CustomerDao.class
-tests\Test_FlightDao.class
