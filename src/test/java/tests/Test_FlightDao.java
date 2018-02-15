@@ -31,19 +31,19 @@ public class Test_FlightDao {
 	@BeforeClass
 	public static void setUp() {
 		
-		dao.createFlight(new Flight("asdf-asdf1", currentDate, nextDate, 1,     false, 21, 0, null));
-		dao.createFlight(new Flight("asdf-asdf2", currentDate, nextDate, 20,    true,  21, 0, null));
-		dao.createFlight(new Flight("asdf-asdf3", currentDate, nextDate, 300,   false, 21, 5, null));
-		dao.createFlight(new Flight("asdf-asdf4", nextDate, twoDaysFromNow, 4000,  true,  21, 0, null));
-		dao.createFlight(new Flight("asdf-asdf5", nextDate, twoDaysFromNow, 50000, false, 22, 0, null));
+		dao.createFlight(new Flight("asdf-asdf1","here","there" , null,  nextDate, 1,     false, 21, 0));
+		dao.createFlight(new Flight("asdf-asdf2","here","there" ,  null,nextDate, 20,    true,  21, 0 ));
+		dao.createFlight(new Flight("asdf-asdf3", "here","there" , null,nextDate, 300,   false, 21, 5 ));
+		dao.createFlight(new Flight("asdf-asdf4", "there","here" , null,twoDaysFromNow, 4000,  true,  21, 0 ));
+		dao.createFlight(new Flight("asdf-asdf5", "there","here" , null,twoDaysFromNow, 50000, false, 22, 0 ));
 		
-		dao.createFlight(new Flight("asdf-asdf10", currentDate, twoDaysFromNow, 50000, false, 22, 0, null));
-		dao.createFlight(new Flight("asdf-asdf11", currentDate, nextDate, 50000, false, 22, 0, null));
+		dao.createFlight(new Flight("asdf-asdf10",null,null ,  nextDate,twoDaysFromNow, 50000, false, 22, 0));
+		dao.createFlight(new Flight("asdf-asdf11", null,null ,nextDate, nextDate, 50000, false, 22, 0));
 	}
 	
 	@Test
 	public void test_FlightCanBeReadFromDB() {
-		Flight flight = new Flight("asdf-asdf12", currentDate, nextDate, 50000, false, 00022, 0, null);
+		Flight flight = new Flight("asdf-asdf12",null,null, null,nextDate, 50000, false, 00022, 0);
 		dao.createFlight(flight);
 		assertTrue(dao.findFlightById(flight.getId()).getId() == flight.getId());
 	}
@@ -81,21 +81,18 @@ public class Test_FlightDao {
 	}
 	
 	@Test
-	public void test_FlightCanBeFoundByArrivalTime() {
-		
-	
-		
-		List<Flight> result = dao.findFlightByArrivalTime(nextDate);
-		
-		assertTrue(result.size() == 2);
-		
-	}
-	
-	@Test
 	public void test_FlightCanBeFoundByDeparture() {
 		
 		List<Flight> result = dao.findFlightByDeparture(twoDaysFromNow);
 		assertTrue(result.size() == 3);
+		
+	}
+	
+	@Test
+	public void test_FlightCanBeFoundByArrivalTime() {
+		
+		List<Flight> result = dao.findFlightByArrivalTime(nextDate);
+		assertTrue(result.size() == 2);
 		
 	}
 	
@@ -158,4 +155,25 @@ public class Test_FlightDao {
 			fail();
 		}
 	}
+	
+	@Test
+	public void test_getAllFlights() {
+		assertTrue(dao.getAllFlights().size() > 0);
+	}
+	
+	@Test
+	public void test_GetFlightsByLocation() {
+		assertTrue(dao.findFlightByDestination("there").size() == 3);
+		assertTrue( dao.findFlightByDestination("here").size() == 2);
+	}
+	
+	@Test
+	public void test_GetFlightsByDestination() {
+		assertTrue(dao.findFlightByStartingPosition("here").size() == 3);
+		assertTrue(dao.findFlightByStartingPosition("there").size() == 2);
+	}
+	
+	
+	
+	
 }

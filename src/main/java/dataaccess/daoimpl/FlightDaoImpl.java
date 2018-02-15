@@ -83,7 +83,7 @@ public class FlightDaoImpl implements FlightDao {
 
 	@Override
 	public List<Flight> findFlightByDeparture(GregorianCalendar departure) {
-		
+
 		// Build Criteria
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
@@ -129,6 +129,32 @@ public class FlightDaoImpl implements FlightDao {
 
 		return entityList;
 
+	}
+
+	@Override
+	public List<Flight> getAllFlights() {
+		// Build Criteria
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
+		Root<Flight> root = criteria.from(Flight.class);
+		criteria.select(root);
+
+		// Execute Query
+		List<Flight> entityList = crudDao.executeQueryThenCommit(crit -> {
+			return session.createQuery(crit).getResultList();
+		}, criteria);
+
+		return entityList;
+	}
+
+	@Override
+	public List<Flight> findFlightByDestination(String destination) {
+		return crudDao.findByFieldValue("destination",destination);
+	}
+
+	@Override
+	public List<Flight> findFlightByStartingPosition(String startLocation) {
+		return crudDao.findByFieldValue("startLocation",startLocation);
 	}
 
 }

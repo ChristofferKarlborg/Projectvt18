@@ -57,7 +57,9 @@ public class Test_AccountDao {
 	public void test_DeleteAccountFromDB() throws IncorrectAmountOfQueryResultsException{
 	
 		try {
-			dao.removeAccountById(2);
+			Account tmpAccount = dao.findAccountById(2);
+			
+			dao.removeAccount(tmpAccount);
 			
 			dao.findAccountById(2);
 			System.out.println("We shouldn't get here");
@@ -73,12 +75,13 @@ public class Test_AccountDao {
 		//TODO: redo 
 		
 		try {
-			Account updatedAccount = new Account("asdf55", "asdf@asdf555.com");
-			updatedAccount.setId(3);
+			Account updatedAccount = dao.findAccountById(3);
+			updatedAccount.setName("asdf55");
 	
 			dao.updateAccount(updatedAccount);
 			
-			assertTrue(dao.findAccountById(3).getName().equals("asdf55"));
+			Account tmpAccount = dao.findAccountById(3);
+			assertTrue("id: " + tmpAccount.getId() + "name :" +  tmpAccount.getName(),tmpAccount.getName().equals("asdf55"));
 		} catch (Exception e) {
 				fail();	
 		}	

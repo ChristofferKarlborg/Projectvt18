@@ -16,12 +16,17 @@ public interface FlightDao {
 	// Read
 	public Flight findFlightById(int flightId);
 	public Flight findFlightByAircraftRegistrationNumber(String aircraftRegistrationNumber) throws IncorrectAmountOfQueryResultsException;
+	
 	public List<Flight> findFlightByArrivalTime(GregorianCalendar arrivalTime);
 	public List<Flight> findFlightByDeparture(GregorianCalendar departure) ;
 	public List<Flight> findFlightByCompanyID(int companyID) ;
 	public List<Flight> findFlightByInternational(boolean international) ;
 	public List<Flight> findFlightByGate(int gate);
 	public List<Flight> findFlightByDelayed();
+	public List<Flight> findFlightByDestination(String destination);
+	public List<Flight> findFlightByStartingPosition(String startLocation);
+	
+	public List<Flight> getAllFlights();
 	
 	// Update
 	public void updateFlight(Flight flightToUpdate) throws UserDoesNotExistException;

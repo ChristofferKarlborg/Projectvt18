@@ -19,27 +19,39 @@ public class Flight implements EntityIdAccess {
 	private int id;
 	
 	private String aircraftRegistrationNumber;
-	private GregorianCalendar arrivalTime;
+	private String startLocation;
+	private String destination;
+	
 	private GregorianCalendar departure;
-	private int companyID;
+	private GregorianCalendar arrivalTime;
+	
 	private boolean international;
+	
+	private int companyID;	
 	private int gate;
 	private int delayed;
-	
-	//TODO: add seats
-	@Transient
-	List<Seat> seats;
-	
-	public Flight(String aircraftRegistrationNumber, GregorianCalendar arrivalTime, GregorianCalendar departure, int companyID, boolean international, int gate, int delayed, List<Seat> seats) {
+		
+	public Flight(String aircraftRegistrationNumber,
+			String startLocation,
+			String destination,
+			GregorianCalendar departure,
+			GregorianCalendar arrivalTime,
+			int companyID,
+			boolean international,
+			int gate,
+			int delayed){
+		
 		super();
 		this.aircraftRegistrationNumber = aircraftRegistrationNumber;
+		this.startLocation = startLocation;
+		this.destination = destination;
+	
 		this.arrivalTime = arrivalTime;
 		this.departure = departure;
 		this.companyID = companyID;
 		this.international = international;
 		this.gate = gate;
 		this.delayed = delayed;
-		this.seats = seats;
 	}
 	
 	private Flight() {
@@ -52,9 +64,19 @@ public class Flight implements EntityIdAccess {
 	public String getAircraftRegistrationNumber() {
 		return aircraftRegistrationNumber;
 	}
+
+	public String getStartLocation() {
+		return startLocation;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
 	public GregorianCalendar getArrivalTime() {
 		return arrivalTime;
 	}
+
 	public GregorianCalendar getDeparture() {
 		return departure;
 	}
@@ -70,9 +92,7 @@ public class Flight implements EntityIdAccess {
 	public int getDelayed() {
 		return delayed;
 	}
-	public void setArrivalTime(GregorianCalendar arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
+
 	public void setDeparture(GregorianCalendar departure) {
 		this.departure = departure;
 	}
@@ -84,6 +104,20 @@ public class Flight implements EntityIdAccess {
 	}
 	public void setDelayed(int delayed) {
 		this.delayed = delayed;
+	}
+	
+	public boolean noFieldIsNull() {
+		if (      this.destination == null
+				||this.startLocation == null
+				||this.arrivalTime == null
+				||this.departure == null
+				||this.aircraftRegistrationNumber == null
+				) {
+			return true;
+		}else {
+			return false;
+		}
+				
 	}
 
 	@Override
@@ -110,6 +144,8 @@ public class Flight implements EntityIdAccess {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	
