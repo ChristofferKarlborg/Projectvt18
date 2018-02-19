@@ -64,6 +64,8 @@ public class FlightDaoImpl implements FlightDao {
 		return crudDao.findByFieldValueSingleResult("aircraftRegistrationNumber", aircraftRegistrationNumber);
 	}
 
+	
+	//TODO : this should be possible to move over to a generic later
 	@Override
 	public List<Flight> findFlightByArrivalTime(GregorianCalendar arrivalTime) {
 

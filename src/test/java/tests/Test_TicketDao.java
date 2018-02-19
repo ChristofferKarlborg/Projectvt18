@@ -101,7 +101,7 @@ public class Test_TicketDao {
 			ticketList = dao.findTicketByCustomerId(5);
 			
 		} catch (IncorrectAmountOfQueryResultsException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			fail();
 		}

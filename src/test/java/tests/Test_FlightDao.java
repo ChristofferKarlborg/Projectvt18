@@ -31,9 +31,9 @@ public class Test_FlightDao {
 	@BeforeClass
 	public static void setUp() {
 		
-		dao.createFlight(new Flight("asdf-asdf1","here","there" , null,  nextDate, 1,     false, 21, 0));
-		dao.createFlight(new Flight("asdf-asdf2","here","there" ,  null,nextDate, 20,    true,  21, 0 ));
-		dao.createFlight(new Flight("asdf-asdf3", "here","there" , null,nextDate, 300,   false, 21, 5 ));
+		dao.createFlight(new Flight("asdf-asdf1","here","there" , null,  nextDate     , 1,     false, 21, 0));
+		dao.createFlight(new Flight("asdf-asdf2","here","there" ,  null, nextDate      , 20,    true,  21, 0 ));
+		dao.createFlight(new Flight("asdf-asdf3", "here","there" , null, nextDate      , 300,   false, 21, 5 ));
 		dao.createFlight(new Flight("asdf-asdf4", "there","here" , null,twoDaysFromNow, 4000,  true,  21, 0 ));
 		dao.createFlight(new Flight("asdf-asdf5", "there","here" , null,twoDaysFromNow, 50000, false, 22, 0 ));
 		
@@ -83,8 +83,8 @@ public class Test_FlightDao {
 	@Test
 	public void test_FlightCanBeFoundByDeparture() {
 		
-		List<Flight> result = dao.findFlightByDeparture(twoDaysFromNow);
-		assertTrue(result.size() == 3);
+		List<Flight> result = dao.findFlightByDeparture(nextDate);
+		assertTrue(result.size() + " should be 2",result.size() == 2);
 		
 	}
 	
@@ -92,7 +92,7 @@ public class Test_FlightDao {
 	public void test_FlightCanBeFoundByArrivalTime() {
 		
 		List<Flight> result = dao.findFlightByArrivalTime(nextDate);
-		assertTrue(result.size() == 2);
+		assertTrue(result.size() + " should be 5",result.size() == 5);
 		
 	}
 	

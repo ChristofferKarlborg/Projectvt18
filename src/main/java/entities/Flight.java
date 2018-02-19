@@ -14,6 +14,8 @@ import utilities.EntityIdAccess;
 @Entity
 public class Flight implements EntityIdAccess {
  
+	
+	
 	@Id
 	@GeneratedValue
 	private int id;
@@ -22,6 +24,8 @@ public class Flight implements EntityIdAccess {
 	private String startLocation;
 	private String destination;
 	
+	
+	//TODO: replace with the new java date/time
 	private GregorianCalendar departure;
 	private GregorianCalendar arrivalTime;
 	
@@ -113,9 +117,9 @@ public class Flight implements EntityIdAccess {
 				||this.departure == null
 				||this.aircraftRegistrationNumber == null
 				) {
-			return true;
-		}else {
 			return false;
+		}else {
+			return true;
 		}
 				
 	}

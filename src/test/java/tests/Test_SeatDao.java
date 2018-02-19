@@ -31,7 +31,7 @@ public class Test_SeatDao {
 			dao.findSeatById(seat1.getId());
 
 		} catch (EntityDoesNotExistsException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 

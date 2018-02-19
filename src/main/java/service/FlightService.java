@@ -36,10 +36,12 @@ public class FlightService {
 		
 		//Just throw an exception, fine turning the error message and validation can be done on the front end
 		
-		if(   newFlight.getDeparture().after(newFlight.getArrivalTime())
-			||newFlight.getDeparture().before(new GregorianCalendar()) 
-			||newFlight.getDestination().equals(newFlight.getStartLocation())
-			||newFlight.getAircraftRegistrationNumber().equals(null)
+		if(   	 newFlight.getDeparture().after(newFlight.getArrivalTime())
+			||	 newFlight.getDeparture().before(new GregorianCalendar()) 
+			||	 newFlight.getDestination().equals(newFlight.getStartLocation())
+			|| ! newFlight.noFieldIsNull()
+			||	 newFlight.getId() != 0
+			|| 	 newFlight.getDelayed() != 0
 			){
 				throw new ValidationException();
 			}

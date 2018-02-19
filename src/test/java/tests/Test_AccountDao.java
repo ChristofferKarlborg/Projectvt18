@@ -46,7 +46,7 @@ public class Test_AccountDao {
 			assertTrue(foundAccount.getId() == 1);
 			
 		} catch (IncorrectAmountOfQueryResultsException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 			fail();
 		}
@@ -134,7 +134,7 @@ public class Test_AccountDao {
 			
 			assertTrue(account.getTickets().size() == (currentTickets + 2));
 		} catch (UserDoesNotExistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			fail();
 		}
