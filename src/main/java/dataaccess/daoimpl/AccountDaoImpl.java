@@ -22,7 +22,7 @@ import utilities.SimpleGenericCrud;
 public class AccountDaoImpl implements AccountDao {
 
 	private SimpleGenericCrud<Account> crudDao = new SimpleGenericCrud(Account.class);
-	Session session = HibernateUtilities.getSessionFactory().openSession();
+	Session session = crudDao.session;
 
 	
 	@Override
@@ -56,6 +56,15 @@ public class AccountDaoImpl implements AccountDao {
 			throw new UserDoesNotExistException();
 		}
 		
+	}
+
+	@Override
+	public Account findAccountByUserName(String userName) throws UserDoesNotExistException {
+		try {
+			return crudDao.findByFieldValueSingleResult("userName", userName);
+		} catch (IncorrectAmountOfQueryResultsException e) {		
+			throw new UserDoesNotExistException();
+		}
 	}
 
 }

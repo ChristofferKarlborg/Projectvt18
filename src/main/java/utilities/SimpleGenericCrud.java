@@ -30,6 +30,7 @@ public class SimpleGenericCrud<T extends EntityIdAccess> {
 	public SimpleGenericCrud( Class<T> genericClass) {
 		super();
 		this.genericClass = genericClass;
+		
 	}
 
 	//Create

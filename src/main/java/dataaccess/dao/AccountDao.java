@@ -12,6 +12,6 @@ public interface AccountDao {
 	public void updateAccount(Account accountToUpdate) throws UserDoesNotExistException;
 	public void removeAccount(Account accountToRemove) throws UserDoesNotExistException;
 	public Account findAccountByEmail(String accountEmail) throws UserDoesNotExistException;
+	public Account findAccountByUserName(String userName) throws UserDoesNotExistException;
 	
-	//TODO: extend to include search by username
 }

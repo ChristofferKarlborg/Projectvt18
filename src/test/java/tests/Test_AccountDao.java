@@ -39,7 +39,7 @@ public class Test_AccountDao {
 	
 	@Test
 	public void test_ReadUserFromDB() {
-		 //TODO: provide a copy of the DB script so this can run even if saveUser fails
+		 //TODO: provide a copy of the DB script so this can run even if saveUser fails, configure maven for this
 		
 		try {
 			Account foundAccount = dao.findAccountById(1);
@@ -71,8 +71,6 @@ public class Test_AccountDao {
 	
 	@Test
 	public void test_UpdateAccountInDB() {
-		
-		//TODO: redo 
 		
 		try {
 			Account updatedAccount = dao.findAccountById(3);
@@ -107,52 +105,5 @@ public class Test_AccountDao {
 		assertTrue(foundAccount.getName().equals("asdf@asdf6.asdfasdfasdfasdfasdf"));
 	}
 	
-	//TODO: Add back after implementing ticket  and seat classes
 	
-	/*
-	@Test
-	public void addTicketToAccount()  {
-		
-		
-		
-		try {
-			Account account = dao.findAccountByEmail("asdf@asdf7.com");
-			int currentTickets = account.getTickets().size();
-			
-			account.addTicket(new Ticket(account.getId()));
-			
-			
-			dao.updateAccount(account);
-			account = dao.findAccountByEmail("asdf@asdf7.com");
-			
-			account.addTicket(new Ticket(account.getId()));
-			
-			for(Ticket ticket : account.getTickets()) {
-				System.out.println(ticket.getAccountId() + " " + ticket.getId() + " " + ticket.getSeatId());
-			}
-	
-			
-			assertTrue(account.getTickets().size() == (currentTickets + 2));
-		} catch (UserDoesNotExistException e) {
-			
-			e.printStackTrace();
-			fail();
-		}
-		
-		
-	}
-	
-	@Test
-	public void removeTicketFromAccount() throws UserDoesNotExistException {
-		Account account = dao.findAccountByEmail("asdf@asdf7.com");
-		int currentTickets = account.getTickets().size();
-		
-		account.removeTicket(account.getTickets().get(0));
-		dao.updateAccount(account);
-		
-		account = dao.findAccountByEmail("asdf@asdf7.com");
-		
-		assertTrue(account.getTickets().size() == (currentTickets - 1));
-	}
-	*/
 }

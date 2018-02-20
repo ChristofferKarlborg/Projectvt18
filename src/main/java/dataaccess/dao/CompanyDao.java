@@ -4,7 +4,7 @@ import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
 import dataaccess.exceptions.UserDoesNotExistException;
 import entities.Company;
 
-//TODO: not done
+
 
 public interface CompanyDao {
 

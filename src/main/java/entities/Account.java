@@ -23,24 +23,27 @@ public class Account implements EntityIdAccess {
 	
 	private int companyId = -1;
 
-	// TODO: We'll deal with the tickets later, first, make sure it is saved
-	// correctly
-
 	public Account(String name, String email) {
 
 		this.name = name;
 		this.email = email;
+	}
+	
+	public Account(String name, String email, String userName) {
+		this(name, email);
+		this.userName = userName;
 	}
 
 	public Account() {
 
 	}
 
-	public void setCustomer(Account otherCustomer) {
-		this.name = otherCustomer.name;
-		this.email = otherCustomer.email;
-		this.password = otherCustomer.password;
-		this.companyId = otherCustomer.companyId;
+	public void setCustomer(Account otherAccount) {
+		this.name = otherAccount.name;
+		this.email = otherAccount.email;
+		this.password = otherAccount.password;
+		this.companyId = otherAccount.companyId;
+		this.userName = otherAccount.userName;
 	}
 
 	public boolean comparePassword(String otherPasswordPlainText) {
