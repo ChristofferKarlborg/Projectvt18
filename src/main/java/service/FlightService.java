@@ -2,6 +2,7 @@ package service;
 
 
 
+import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -32,12 +33,12 @@ public class FlightService {
 	
 	//Get the flight, the seats and add them to the DB
 	public void registerNewFlight(Flight newFlight, List<Seat> seats ) throws ValidationException{
-		//TODO: Complete validation, decide on a method of approach (How, where and why)
+		//TODO: Doublecheck how this will handle null values
 		
 		//Just throw an exception, fine turning the error message and validation can be done on the front end
 		
-		if(   	 newFlight.getDeparture().after(newFlight.getArrivalTime())
-			||	 newFlight.getDeparture().before(new GregorianCalendar()) 
+		if(   	 newFlight.getDeparture().isAfter(ZonedDateTime.now())
+			||	 newFlight.getArrivalTime().isBefore(ZonedDateTime.now())
 			||	 newFlight.getDestination().equals(newFlight.getStartLocation())
 			|| ! newFlight.noFieldIsNull()
 			||	 newFlight.getId() != 0

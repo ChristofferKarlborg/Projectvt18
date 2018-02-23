@@ -1,7 +1,6 @@
 package dataaccess.daoimpl;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,8 +17,7 @@ import utilities.SimpleGenericCrud;
 
 public class FlightDaoImpl implements FlightDao {
 
-	// TODO: turn to singleton;
-	private SimpleGenericCrud<Flight> crudDao = new SimpleGenericCrud(Flight.class);
+	private SimpleGenericCrud<Flight> crudDao = new SimpleGenericCrud<Flight>(Flight.class);
 	private Session session = crudDao.session;
 
 	public FlightDaoImpl() {
@@ -67,7 +65,7 @@ public class FlightDaoImpl implements FlightDao {
 	
 	//TODO : this should be possible to move over to a generic later
 	@Override
-	public List<Flight> findFlightByArrivalTime(GregorianCalendar arrivalTime) {
+	public List<Flight> findFlightByArrivalTime(ZonedDateTime arrivalTime) {
 
 		// Build Criteria
 		CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -84,7 +82,7 @@ public class FlightDaoImpl implements FlightDao {
 	}
 
 	@Override
-	public List<Flight> findFlightByDeparture(GregorianCalendar departure) {
+	public List<Flight> findFlightByDeparture(ZonedDateTime departure) {
 
 		// Build Criteria
 		CriteriaBuilder builder = session.getCriteriaBuilder();

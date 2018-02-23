@@ -15,31 +15,22 @@ import entities.Ticket;
 import utilities.HibernateUtilities;
 
 public class Test_AccountDao {
-
-	//TODO: Note, hardcoded to the mock implementation, to be changed later.
 	
 	private static AccountDao dao = new AccountDaoImpl();
 	
 	@BeforeClass
 	public static void setUp() {
 
-		dao.createAccount(new Account("asdf3","asdf@asdf2.com"));
-		dao.createAccount(new Account("asdf4","asdf@asdf4.com"));
-		dao.createAccount(new Account("asdf5","asdf@asdf5.com"));
-		dao.createAccount(new Account("asdf6","asdf@asdf6.com"));
-		
-//		Account account7 = new Account("asdf7","asdf@asdf7.com");
-//		account7.addTicket(new Ticket(account7.getId()));
-//		
-//		dao.createAccount(account7);
-		
-		
+		dao.createAccount(new Account("asdf3", "asdf@asdf2.com", "asdf3"));
+		dao.createAccount(new Account("asdf4", "asdf@asdf4.com", "asdf3"));
+		dao.createAccount(new Account("asdf5", "asdf@asdf5.com", "asdf3"));
+		dao.createAccount(new Account("asdf6", "asdf@asdf6.com", "asdf3"));
 		
 	}
 	
 	@Test
 	public void test_ReadUserFromDB() {
-		 //TODO: provide a copy of the DB script so this can run even if saveUser fails, configure maven for this
+		 
 		
 		try {
 			Account foundAccount = dao.findAccountById(1);

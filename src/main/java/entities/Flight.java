@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -24,10 +26,8 @@ public class Flight implements EntityIdAccess {
 	private String startLocation;
 	private String destination;
 	
-	
-	//TODO: replace with the new java date/time
-	private GregorianCalendar departure;
-	private GregorianCalendar arrivalTime;
+	private ZonedDateTime departure;
+	private ZonedDateTime arrivalTime;
 	
 	private boolean international;
 	
@@ -38,8 +38,8 @@ public class Flight implements EntityIdAccess {
 	public Flight(String aircraftRegistrationNumber,
 			String startLocation,
 			String destination,
-			GregorianCalendar departure,
-			GregorianCalendar arrivalTime,
+			ZonedDateTime departure,
+			ZonedDateTime arrivalTime,
 			int companyID,
 			boolean international,
 			int gate,
@@ -77,11 +77,11 @@ public class Flight implements EntityIdAccess {
 		return destination;
 	}
 
-	public GregorianCalendar getArrivalTime() {
+	public ZonedDateTime getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public GregorianCalendar getDeparture() {
+	public ZonedDateTime getDeparture() {
 		return departure;
 	}
 	public int getCompanyID() {
@@ -97,7 +97,7 @@ public class Flight implements EntityIdAccess {
 		return delayed;
 	}
 
-	public void setDeparture(GregorianCalendar departure) {
+	public void setDeparture(ZonedDateTime departure) {
 		this.departure = departure;
 	}
 	public void setInternational(boolean international) {

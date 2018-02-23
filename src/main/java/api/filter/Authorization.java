@@ -1,18 +1,17 @@
-package filter;
+package api.filter;
 
 import java.io.IOException;
 
-import javax.annotation.Priority;
-import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
+
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 
 
 @Provider
-@Priority(Priorities.AUTHENTICATION)
 @AuthorizationRequired
 public class Authorization implements ContainerRequestFilter {
 
@@ -21,9 +20,10 @@ public class Authorization implements ContainerRequestFilter {
 		// TODO Auto-generated method stub
 		System.out.println("Filter unimplemented");
 		
-		context.abortWith(Response.status(401).build());
-		return;
+		//context.abortWith(Response.status(404).build());
+		//return;
 		
 	}
+
 
 }

@@ -1,7 +1,7 @@
 package dataaccess.dao;
 
 
-import java.util.GregorianCalendar;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
@@ -17,8 +17,8 @@ public interface FlightDao {
 	public Flight findFlightById(int flightId);
 	public Flight findFlightByAircraftRegistrationNumber(String aircraftRegistrationNumber) throws IncorrectAmountOfQueryResultsException;
 	
-	public List<Flight> findFlightByArrivalTime(GregorianCalendar arrivalTime);
-	public List<Flight> findFlightByDeparture(GregorianCalendar departure) ;
+	public List<Flight> findFlightByArrivalTime(ZonedDateTime arrivalTime);
+	public List<Flight> findFlightByDeparture(ZonedDateTime departure) ;
 	public List<Flight> findFlightByCompanyID(int companyID) ;
 	public List<Flight> findFlightByInternational(boolean international) ;
 	public List<Flight> findFlightByGate(int gate);

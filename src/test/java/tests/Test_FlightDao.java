@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -20,17 +21,12 @@ import entities.Flight;
 public class Test_FlightDao {
 
 	private static FlightDao dao = new FlightDaoImpl();
-	private static GregorianCalendar currentDate = new GregorianCalendar();
-	private static GregorianCalendar nextDate = new GregorianCalendar();
-	private static GregorianCalendar twoDaysFromNow = new GregorianCalendar();
-	{
-		nextDate.add(GregorianCalendar.DAY_OF_YEAR, 1);
-		twoDaysFromNow.add(GregorianCalendar.DAY_OF_YEAR, 2);
-	}
+	private static ZonedDateTime nextDate = ZonedDateTime.now().plusDays(1);
+	private static ZonedDateTime twoDaysFromNow = ZonedDateTime.now().plusDays(2);
 
 	@BeforeClass
 	public static void setUp() {
-		
+
 		dao.createFlight(new Flight("asdf-asdf1","here","there" , null,  nextDate     , 1,     false, 21, 0));
 		dao.createFlight(new Flight("asdf-asdf2","here","there" ,  null, nextDate      , 20,    true,  21, 0 ));
 		dao.createFlight(new Flight("asdf-asdf3", "here","there" , null, nextDate      , 300,   false, 21, 5 ));
@@ -89,11 +85,10 @@ public class Test_FlightDao {
 	}
 	
 	@Test
-	public void test_FlightCanBeFoundByArrivalTime() {
-		
+	public void test_FlightCanBeFoundByArrivalTime() {		
 		List<Flight> result = dao.findFlightByArrivalTime(nextDate);
-		assertTrue(result.size() + " should be 5",result.size() == 5);
 		
+		assertTrue(result.size() + " should be 5",result.size() == 5);
 	}
 	
 	@Test

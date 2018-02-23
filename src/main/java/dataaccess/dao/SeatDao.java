@@ -4,9 +4,7 @@ import java.util.List;
 
 import dataaccess.exceptions.EntityDoesNotExistsException;
 import dataaccess.exceptions.IncorrectAmountOfQueryResultsException;
-import dataaccess.exceptions.UserDoesNotExistException;
 import entities.Seat;
-import utilities.SeatClass;
 
 public interface SeatDao {
 	// CRUD

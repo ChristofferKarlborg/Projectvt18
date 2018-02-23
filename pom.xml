@@ -22,23 +22,23 @@
 		<finalName>ProjectVt18</finalName>
 
 
-	<testResources>
-		<testResource>
-		 <directory>src/test/resources/</directory>
-			<includes>
-				<include>hibernate.cfg.xml</include>			
-			</includes>
-		</testResource>	
+		<testResources>
+			<testResource>
+				<directory>src/test/resources/</directory>
+				<includes>
+					<include>hibernate.cfg.xml</include>
+				</includes>
+			</testResource>
 
-		<testResource>
-		<directory>src/main/resources/</directory>
-			<excludes>				
-				<exclude>hibernate.cfg.xml</exclude>
-			</excludes>
-			
-		</testResource>
-	</testResources>
-		
+			<testResource>
+				<directory>src/main/resources/</directory>
+				<excludes>
+					<exclude>hibernate.cfg.xml</exclude>
+				</excludes>
+
+			</testResource>
+		</testResources>
+
 
 		<plugins>
 
@@ -62,16 +62,16 @@
 					<properties>
 						<property>
 							<name>listener</name>
-							<value>tests.InMemoryDbUtility</value>
+							<value>tests.InMemoryDbTestUtility</value>
 						</property>
 					</properties>
 
 
 					<excludes>
 						<exclude>**/Test_HsqlDB.java</exclude>
-						
+
 					</excludes>
-					
+
 				</configuration>
 			</plugin>
 
@@ -207,14 +207,14 @@
 
 
 
+		<!-- JWT authorization -->
 
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.3.0</version>
+		</dependency>
 
-		<!-- Dependency Injection -->
-
-		<!-- To be added later <dependency> <groupId>org.springframework</groupId> 
-			<artifactId>spring-beans</artifactId> <version>5.0.3.RELEASE</version> </dependency> 
-			<dependency> <groupId>org.springframework</groupId> <artifactId>spring-core</artifactId> 
-			<version>5.0.3.RELEASE</version> </dependency> -->
 
 		<!-- For testing purposes -->
 		<dependency>

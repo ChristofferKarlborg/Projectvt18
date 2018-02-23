@@ -1,23 +1,22 @@
 package api;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import dataaccess.dao.AccountDao;
-import dataaccess.daoimpl.AccountDaoImpl;
-import dataaccess.exceptions.UserDoesNotExistException;
+import api.filter.AuthorizationRequired;
+import datatransfer.AccountCreationEntity;
 import entities.Account;
-import filter.AuthorizationRequired;
+import service.AccountService;
+import service.exception.ValidationException;
 
 
-@AuthorizationRequired
-@Path("")
+@Path("account")
 public class AccountApi {
 	
-// TODO: since we now have a server, we also need a to migrate to a proper db outside of testing 
-//	private static AccountDao dao = new AccountDaoImpl();
+	private static AccountService service = new AccountService();
 	
 	@GET
 	@AuthorizationRequired
@@ -31,17 +30,29 @@ public class AccountApi {
 	@Path("{email}")
 	@AuthorizationRequired
 	public Response get(@PathParam("email") String email) {
-		
+		System.out.println("in api");
 		
 		try {
-			Account account = new Account("asdf3","asdf@asdf2.com");
+			Account account = new Account("username", "email", "password");
 			return Response.ok(account).build();
 		} catch (Exception e) {
 			return Response.status(400).build();
 		}
-		
+
+	}
 	
+	
+	@POST
+	@Path("new")
+	public Response create(AccountCreationEntity account) {
 		
+		try {
+			service.createNewAccount(account.getEmail(), account.getPassword(), account.getEmail());
+			
+			return Response.status(200).build();
+		}catch (ValidationException e) {
+			return Response.status(400).build();
+		}
 	
 	}
 }

@@ -23,15 +23,11 @@ public class Account implements EntityIdAccess {
 	
 	private int companyId = -1;
 
-	public Account(String name, String email) {
+	public Account(String username, String email, String password) {
 
-		this.name = name;
+		this.userName = username;
+		this.setPassword(password);
 		this.email = email;
-	}
-	
-	public Account(String name, String email, String userName) {
-		this(name, email);
-		this.userName = userName;
 	}
 
 	public Account() {
@@ -53,7 +49,12 @@ public class Account implements EntityIdAccess {
 			return false;
 		}
 	}
+	
+	public String getPassword() {
+		return this.password;
+	}
 
+	//TODO: still only a messageDigest
 	public void setPassword(String plainText) {
 		this.password = encryptPassword(plainText);
 	}

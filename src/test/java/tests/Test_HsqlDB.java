@@ -29,7 +29,7 @@ public class Test_HsqlDB {
 
 		}
 
-		Account tmpCustomer = new Account("asdf", "asdf@asdf.com");
+		Account tmpCustomer = new Account("asdf", "asdf@asdf.com", "asdf3");
 
 		Session session = HibernateUtilities.getSessionFactory().openSession();
 		session.beginTransaction();

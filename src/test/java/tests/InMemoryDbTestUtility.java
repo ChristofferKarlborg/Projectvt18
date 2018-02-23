@@ -8,7 +8,7 @@ import org.junit.runner.notification.RunListener;
 
 import utilities.HibernateUtilities;
 
-public class InMemoryDbUtility extends RunListener{
+public class InMemoryDbTestUtility extends RunListener{
 
 	 @Override
 	  public void testRunFinished(Result result) throws Exception {
