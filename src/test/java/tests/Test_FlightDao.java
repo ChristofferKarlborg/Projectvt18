@@ -168,6 +168,12 @@ public class Test_FlightDao {
 		assertTrue(dao.findFlightByStartingPosition("there").size() == 2);
 	}
 	
+	@Test
+	public void test_GetFlightsByStartAndDestination() {
+		assertTrue(dao.findFlightByStartAndDestination("here", "there").size() == 3);
+		assertTrue(dao.findFlightByStartAndDestination("there", "here").size() == 2);
+	}
+	
 	
 	
 	

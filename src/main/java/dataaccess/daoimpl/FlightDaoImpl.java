@@ -157,4 +157,24 @@ public class FlightDaoImpl implements FlightDao {
 		return crudDao.findByFieldValue("startLocation",startLocation);
 	}
 
+	@Override
+	public List<Flight> findFlightByStartAndDestination(String start, String destination) {
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
+		
+		Root<Flight> root = criteria.from(Flight.class);
+		
+		
+		criteria.select(root).where(builder.and(builder.equal(root.get("startLocation"), start) , builder.equal(root.get("destination"), destination)));
+
+		// Execute Query
+		List<Flight> entityList = crudDao.executeQueryThenCommit(crit -> {
+			return session.createQuery(crit).getResultList();
+		}, criteria);
+
+		return entityList;
+		
+	}
+
 }

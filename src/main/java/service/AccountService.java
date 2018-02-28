@@ -59,6 +59,10 @@ public class AccountService {
 			return false;
 		}
 	}
+	
+	public Account getAccountByEmail(String email) throws UserDoesNotExistException {
+		return dao.findAccountByEmail(email);
+	}
 
 //	public Account checkCredentials(String email, String password)
 //			throws InvalidUserNameException, InvalidPasswordException {

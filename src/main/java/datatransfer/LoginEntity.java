@@ -2,17 +2,17 @@ package datatransfer;
 
 public class LoginEntity {
 	
-	private String password;
+	private String plaintextPassword;
 	private String email;
 	
-	public String getPassword() {
-		return password;
+	public String getPlaintextPassword() {
+		return plaintextPassword;
 	}
 	public String getEmail() {
 		return email;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPlaintextPassword(String password) {
+		this.plaintextPassword = password;
 	}
 	public void setEmail(String email) {
 		this.email = email;

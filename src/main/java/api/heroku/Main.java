@@ -1,4 +1,4 @@
-package utilities;
+package api.heroku;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -18,7 +18,7 @@ public class Main {
 
         
         //Set the virtual directory for access
-        root.setContextPath("/");
+        root.setContextPath("/api/");
         // Parent loader priority is a class loader setting that Jetty accepts.
         // By default Jetty will behave like most web containers in that it will
         // allow your application to replace non-server libraries that are part of the

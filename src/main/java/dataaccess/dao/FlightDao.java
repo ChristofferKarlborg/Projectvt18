@@ -25,6 +25,7 @@ public interface FlightDao {
 	public List<Flight> findFlightByDelayed();
 	public List<Flight> findFlightByDestination(String destination);
 	public List<Flight> findFlightByStartingPosition(String startLocation);
+	public List<Flight> findFlightByStartAndDestination(String start, String destination);
 	
 	public List<Flight> getAllFlights();
 	

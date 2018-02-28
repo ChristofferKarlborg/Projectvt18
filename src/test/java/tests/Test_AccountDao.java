@@ -64,7 +64,7 @@ public class Test_AccountDao {
 	public void test_UpdateAccountInDB() {
 		
 		try {
-			Account updatedAccount = dao.findAccountById(3);
+			Account updatedAccount = dao.findAccountByUserName("asdf5");
 			updatedAccount.setName("asdf55");
 	
 			dao.updateAccount(updatedAccount);

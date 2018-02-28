@@ -21,5 +21,9 @@ public interface TicketDao {
 				public List<Ticket>findTicketByCustomerId(int customerID) throws IncorrectAmountOfQueryResultsException;
 				
 				public Ticket findTicketBySeatId(int seatId) throws IncorrectAmountOfQueryResultsException;
+				
+	// Other
+				
+				public List<Ticket> getTicketsByFlightId(int flightId);
 
 }

@@ -8,10 +8,13 @@ import java.util.List;
 
 import dataaccess.dao.FlightDao;
 import dataaccess.dao.SeatDao;
+import dataaccess.dao.TicketDao;
 import dataaccess.daoimpl.FlightDaoImpl;
 import dataaccess.daoimpl.SeatDaoImpl;
+import dataaccess.daoimpl.TicketDaoImpl;
 import entities.Flight;
 import entities.Seat;
+import entities.Ticket;
 import service.exception.ValidationException;
 
 
@@ -19,6 +22,7 @@ public class FlightService {
 	private static FlightService instance = null;
 	private FlightDao flightDao = new FlightDaoImpl();
 	private SeatDao seatDao = new SeatDaoImpl();
+	private TicketDao ticketDao = new TicketDaoImpl();
 
 	public static FlightService getInstance() {
 
@@ -49,10 +53,42 @@ public class FlightService {
 		
 	}
 	
+	
+	
 	public List<Flight> getAllFlights() {
 		return flightDao.getAllFlights();
 	}
 	
+	public List<Flight> getFlightByStartAndDestionation(String start, String destination) {
+		return flightDao.findFlightByStartAndDestination(start, destination);
+	}
+	
+	public List<Flight> getFlightByStart(String start) {
+		return flightDao.findFlightByStartingPosition(start);		
+	}
+	
+	public List<Flight> getFlightByDestination(String destination) {
+		return flightDao.findFlightByDestination(destination);
+	}
+	
+	public List<Flight> getFlightByCompany(int companyID){
+		return flightDao.findFlightByCompanyID(companyID);
+	}
+	
+	public List<Seat> getFlightSeats(int flightId){
+		return seatDao.findSeatByFlightId(flightId);
+	}
+	
+
+	
+	
 	
 	
 }
+
+
+
+
+
+
+

@@ -9,6 +9,9 @@ import javax.persistence.*;
 
 import utilities.EntityIdAccess;
 
+//TODO: add account role;
+//TODO: change over to proper ORM;
+
 @Entity
 public class Account implements EntityIdAccess {
 
@@ -59,7 +62,7 @@ public class Account implements EntityIdAccess {
 		this.password = encryptPassword(plainText);
 	}
 
-	private static String encryptPassword(String password) {
+	public static String encryptPassword(String password) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.reset();
@@ -70,8 +73,7 @@ public class Account implements EntityIdAccess {
 			StringBuilder sb = new StringBuilder();
 
 			for (byte b : bytes) {
-				sb.append(String.format("02X", b));
-
+				sb.append(String.format("%x", b));
 			}
 			return sb.toString();
 		} catch (NoSuchAlgorithmException e) {
